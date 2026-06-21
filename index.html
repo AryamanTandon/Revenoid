@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aryaman Tandon — Mechanical Engineering Portfolio</title>
+  <meta name="description" content="Mechanical engineering (mechatronics) projects and portfolio of Aryaman Tandon — CAD, PCB design, machining, prototyping, and analysis." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aryamantandon.com/" />
+  <meta property="og:title" content="Aryaman Tandon — Mechanical Engineering Portfolio" />
+  <meta property="og:description" content="Mechanical engineering (mechatronics) student at the University of Washington. Projects in CAD, PCB design, machining, prototyping, and analysis." />
+  <meta property="og:image" content="https://aryamantandon.com/assets/projects/batnav-device.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Aryaman Tandon — Mechanical Engineering Portfolio" />
+  <meta name="twitter:description" content="Mechanical engineering projects: BatNAV wearable, AIAA Design/Build/Fly, machining, and more." />
+  <meta name="twitter:image" content="https://aryamantandon.com/assets/projects/batnav-device.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- ===== Navbar ===== -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#top" class="nav__brand">
+        <img src="assets/uw-logo.svg" alt="University of Washington" class="nav__logo" />
+        <span>Aryaman Tandon</span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <a href="assets/Aryaman-Tandon-Resume.pdf" class="nav__resume" target="_blank" rel="noopener">Résumé</a>
+      </nav>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="hero">
+      <div class="hero__inner">
+        <p class="hero__eyebrow reveal">Mechanical Engineering · Mechatronics</p>
+        <h1 class="hero__title reveal">
+          Aryaman Tandon
+        </h1>
+        <p class="hero__subtitle reveal">
+          Mechanical engineering student at the University of Washington who
+          designs, builds, and tests mechatronic systems — from CAD and PCB design
+          to machining, prototyping, and validation. Here's a look at what I've made.
+        </p>
+        <div class="hero__actions reveal">
+          <a href="#projects" class="btn btn--primary">View Projects</a>
+          <a href="#contact" class="btn btn--ghost">Get in Touch</a>
+        </div>
+      </div>
+      <a href="#about" class="hero__scroll" aria-label="Scroll down">
+        <span class="hero__scroll-dot"></span>
+      </a>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="section__title reveal">About</h2>
+        <div class="about__grid">
+          <div class="about__text reveal" data-reveal="left">
+            <p>
+              I'm a Mechanical Engineering student at the University of Washington
+              (B.S. in Mechanical Engineering: Mechatronics, 2027), drawn to work
+              that sits at the intersection of mechanical design, electronics, and
+              hands-on fabrication.
+            </p>
+            <p>
+              Over the last few years I've designed enclosures and prototypes at a
+              startup, optimized aircraft aerodynamics for a team that placed 3rd of
+              106 at AIAA Design/Build/Fly, machined precision parts on the lathe and
+              mill, and built an award-winning wearable navigation device for the
+              visually impaired. I'm always looking for the next thing to design,
+              build, and test.
+            </p>
+          </div>
+          <aside class="about__facts reveal" data-reveal="right">
+            <div class="fact">
+              <span class="fact__num" data-count="4" data-suffix="+">0</span>
+              <span class="fact__label">Featured projects</span>
+            </div>
+            <div class="fact">
+              <span class="fact__num" data-count="3.6" data-decimals="1">0</span>
+              <span class="fact__label">GPA / 4.00</span>
+            </div>
+            <div class="fact">
+              <span class="fact__num" data-count="3" data-suffix="rd">0</span>
+              <span class="fact__label">AIAA DBF (of 106)</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Featured showcase (scroll-scrubbed, Apple-style) ===== -->
+    <section class="showcase" id="showcase" aria-label="Featured project: Project BatNAV">
+      <div class="showcase__sticky">
+        <div class="showcase__media-wrap">
+          <img class="showcase__media" src="assets/projects/batnav-device.jpg" alt="Project BatNAV wearable navigation device" />
+        </div>
+        <div class="showcase__scrim"></div>
+
+        <div class="container showcase__content">
+          <p class="showcase__eyebrow">Featured Project — BatNAV</p>
+
+          <div class="showcase__steps">
+            <article class="showcase__step is-active">
+              <span class="showcase__num">01</span>
+              <h3>Ultrasonic obstacle detection</h3>
+              <p>A shoe-mounted device scans the path ahead with ultrasonic sensors — an inconspicuous alternative to the white cane.</p>
+            </article>
+            <article class="showcase__step">
+              <span class="showcase__num">02</span>
+              <h3>Proximity-scaled haptic feedback</h3>
+              <p>Vibration motors pulse with intensity that grows as obstacles get closer, mapping distance directly to touch.</p>
+            </article>
+            <article class="showcase__step">
+              <span class="showcase__num">03</span>
+              <h3>Gyroscope false-reading filter</h3>
+              <p>An MPU6050 cuts the motors when the foot bends past a threshold, eliminating false alerts from the ground.</p>
+            </article>
+            <article class="showcase__step">
+              <span class="showcase__num">04</span>
+              <h3>OSHWA-certified open hardware</h3>
+              <p>Fully documented and reproducible — awarded an Open Source Hardware certification (IN000035).</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="showcase__dots" aria-hidden="true">
+          <span class="showcase__dot is-active"></span>
+          <span class="showcase__dot"></span>
+          <span class="showcase__dot"></span>
+          <span class="showcase__dot"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section class="section section--alt" id="projects">
+      <div class="container">
+        <h2 class="section__title reveal">Projects</h2>
+        <p class="section__lead reveal">
+          A selection of engineering projects spanning design, analysis, and
+          hands-on fabrication.
+        </p>
+
+        <div class="projects__grid" id="projectsGrid">
+          <!-- Project cards are rendered from js/projects.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section class="section" id="skills">
+      <div class="container">
+        <h2 class="section__title reveal">Skills &amp; Tools</h2>
+        <div class="skills__groups">
+          <div class="skills__group reveal">
+            <h3>CAD &amp; Simulation</h3>
+            <ul class="tags">
+              <li>SolidWorks</li><li>Fusion 360</li><li>OpenVSP</li><li>XFLR5</li><li>MATLAB</li><li>GD&amp;T</li>
+            </ul>
+          </div>
+          <div class="skills__group reveal">
+            <h3>Analysis</h3>
+            <ul class="tags">
+              <li>Aerodynamic Simulation</li><li>Wind Tunnel Testing</li><li>Data Analysis</li><li>Python</li><li>Java</li>
+            </ul>
+          </div>
+          <div class="skills__group reveal">
+            <h3>Fabrication</h3>
+            <ul class="tags">
+              <li>Lathe</li><li>Mill</li><li>Bandsaw</li><li>Manual Machining</li><li>3D Printing</li><li>Laser Cutting</li><li>Soldering</li><li>PCB Design</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="section section--alt" id="contact">
+      <div class="container container--narrow">
+        <h2 class="section__title reveal">Get in Touch</h2>
+        <p class="section__lead reveal">
+          Open to opportunities and collaboration. The best way to reach me:
+        </p>
+        <div class="contact__actions reveal">
+          <a href="mailto:aryaman.tandon@gmail.com" class="btn btn--primary">Email Me</a>
+          <a href="https://www.linkedin.com/in/aryamantandon/" class="btn btn--ghost" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/AryamanTandon" class="btn btn--ghost" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <img src="assets/uw-logo.svg" alt="University of Washington" class="footer__logo" />
+      <p>© <span id="year"></span> Aryaman Tandon · University of Washington · Built from scratch.</p>
+    </div>
+  </footer>
+
+  <script src="js/projects.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
