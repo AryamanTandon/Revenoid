@@ -155,6 +155,69 @@
       </div>
     </section>
 
+    <!-- ===== Selected Work (sticky visual + scrolling story) ===== -->
+    <section class="work" id="work" aria-label="Selected work">
+      <div class="container">
+        <h2 class="section__title reveal">Selected Work</h2>
+        <p class="section__lead reveal">A closer look at three more projects — scroll through.</p>
+      </div>
+
+      <div class="work__layout">
+        <!-- Sticky media column (desktop) -->
+        <div class="work__media" aria-hidden="true">
+          <div class="work__frame">
+            <img class="work__img is-active" data-work="0" src="assets/projects/dbf-plane.avif" alt="" />
+            <img class="work__img" data-work="1" src="assets/projects/autev.jpg" alt="" />
+            <img class="work__img" data-work="2" src="assets/projects/stirling-engine.png" alt="" />
+          </div>
+        </div>
+
+        <!-- Scrolling story column -->
+        <div class="work__content">
+          <article class="work__panel is-active" data-work="0">
+            <span class="work__num">01 — Aerospace</span>
+            <h3>Orca Aircraft — Design/Build/Fly</h3>
+            <img class="work__inline" src="assets/projects/dbf-plane.avif" alt="Orca competition aircraft in flight" loading="lazy" />
+            <p>
+              Designed wing configurations and Fowler flaps in OpenVSP and XFLR5,
+              optimizing NACA airfoils for turning radius and takeoff distance.
+              MATLAB scripts automated parameter sweeps across 15+ iterations,
+              validated with 5+ hours in UW's 3×3 wind tunnel.
+            </p>
+            <p class="work__highlight">3rd of 106 teams · 2024 AIAA Design/Build/Fly</p>
+            <div class="work__links">
+              <a href="https://www.dbfuw.com" target="_blank" rel="noopener">UW DBF Team &rarr;</a>
+            </div>
+          </article>
+
+          <article class="work__panel" data-work="1">
+            <span class="work__num">02 — Internship</span>
+            <h3>Mechanical Engineering — Autev</h3>
+            <img class="work__inline" src="assets/projects/autev.jpg" alt="Autev autonomous EV charging unit" loading="lazy" />
+            <p>
+              Designed enclosures and structural housings in SolidWorks for an
+              autonomous EV-charging robot, iterating on geometry and tolerances
+              for fit and manufacturability.
+            </p>
+            <p class="work__highlight">Built &amp; tested prototypes with a cross-functional EE/SW team</p>
+          </article>
+
+          <article class="work__panel" data-work="2">
+            <span class="work__num">03 — Machining</span>
+            <h3>Stirling Engine</h3>
+            <img class="work__inline" src="assets/projects/stirling-engine.png" alt="Machined Stirling engine running" loading="lazy" />
+            <p>
+              Machining the power piston, piston rod, crank journal, and cylinder
+              base to tight tolerances from tool steel and brass on the lathe,
+              mill, and bandsaw — translating CAD drawings into sequenced process
+              plans with tolerance documentation.
+            </p>
+            <p class="work__highlight">Assembled &amp; tested for an inter-section competition</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== Projects ===== -->
     <section class="section section--alt" id="projects">
       <div class="container">

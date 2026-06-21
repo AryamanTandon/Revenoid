@@ -19,6 +19,8 @@
   var sections = [];
   var bar, hero, heroInner, showcase;
   var countersStarted = [];
+  var workPanels = [];
+  var workImgs = [];
 
   function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
 
@@ -166,6 +168,17 @@
 
     // Apple-style showcase
     updateShowcase();
+
+    // Selected Work — swap the sticky image to match the panel at viewport center
+    if (workPanels.length) {
+      var center = vh * 0.5;
+      var activeW = 0;
+      for (var wi = 0; wi < workPanels.length; wi++) {
+        if (workPanels[wi].getBoundingClientRect().top <= center) activeW = wi;
+      }
+      for (var wj = 0; wj < workPanels.length; wj++) workPanels[wj].classList.toggle("is-active", wj === activeW);
+      for (var wk = 0; wk < workImgs.length; wk++) workImgs[wk].classList.toggle("is-active", wk === activeW);
+    }
   }
 
   // Run update() directly on scroll. update() is cheap (a short loop over a
@@ -199,6 +212,8 @@
     counterEls = Array.prototype.slice.call(document.querySelectorAll("[data-count]"));
     navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__links a[href^="#"]'));
     sections = Array.prototype.slice.call(document.querySelectorAll("main section[id]"));
+    workPanels = Array.prototype.slice.call(document.querySelectorAll(".work__panel"));
+    workImgs = Array.prototype.slice.call(document.querySelectorAll(".work__frame .work__img"));
 
     if (prefersReduced) {
       revealEls.forEach(function (el) { el.classList.add("is-visible"); });
