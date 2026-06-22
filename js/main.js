@@ -26,6 +26,33 @@
 
   function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
 
+  /* ---------- Lightbox (click-to-enlarge) ---------- */
+  function initLightbox() {
+    var lb = document.getElementById("lightbox");
+    var lbImg = document.getElementById("lightboxImg");
+    var closeBtn = document.getElementById("lightboxClose");
+    if (!lb || !lbImg) return;
+
+    function open(src, alt) {
+      lbImg.setAttribute("src", src);
+      lbImg.setAttribute("alt", alt || "");
+      lb.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+    }
+    function close() {
+      lb.classList.remove("is-open");
+      document.body.style.overflow = "";
+      lbImg.setAttribute("src", "");
+    }
+
+    document.querySelectorAll(".zoomable").forEach(function (img) {
+      img.addEventListener("click", function () { open(img.currentSrc || img.src, img.alt); });
+    });
+    lb.addEventListener("click", function () { close(); });
+    if (closeBtn) closeBtn.addEventListener("click", function (e) { e.stopPropagation(); close(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+  }
+
   /* ---------- Mobile menu ---------- */
   function initMobileMenu() {
     var toggle = document.getElementById("navToggle");
@@ -195,6 +222,7 @@
 
     initNavScroll();
     initMobileMenu();
+    initLightbox();
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });

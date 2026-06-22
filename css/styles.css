@@ -414,6 +414,61 @@ img { max-width: 100%; display: block; }
   .viewer__details { grid-template-columns: 1fr; gap: 36px; margin-top: 40px; }
 }
 
+/* Inspiration reference figure */
+.inspo { max-width: 340px; margin: 30px 0 0; }
+.inspo__img {
+  width: 100%; display: block;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.inspo figcaption,
+.exploded figcaption {
+  color: var(--text-dim);
+  font-size: .85rem;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* Exploded assembly drawing (white card, like a real spec sheet) */
+.exploded { max-width: 940px; margin: 56px auto 0; }
+.exploded__img {
+  width: 100%; display: block;
+  border-radius: var(--radius);
+  background: #fff;
+  border: 1px solid var(--border);
+}
+
+/* Zoomable images */
+.zoomable { cursor: zoom-in; transition: transform .3s var(--ease); }
+.zoomable:hover { transform: translateY(-3px); }
+
+/* ============================================================
+   Lightbox
+   ============================================================ */
+.lightbox {
+  position: fixed; inset: 0;
+  z-index: 300;
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 24px;
+  background: rgba(8,5,18,.93);
+  backdrop-filter: blur(4px);
+  cursor: zoom-out;
+}
+.lightbox.is-open { display: flex; }
+.lightbox img {
+  max-width: 96vw; max-height: 92vh;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.lightbox__close {
+  position: absolute; top: 16px; right: 24px;
+  background: none; border: 0;
+  color: #fff; font-size: 2.6rem; line-height: 1;
+  cursor: pointer;
+}
+
 /* ============================================================
    Skills
    ============================================================ */

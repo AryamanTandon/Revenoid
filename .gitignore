@@ -7,3 +7,6 @@
 # Large source videos — host these on YouTube/Vimeo and embed instead
 *.mov
 *.MOV
+
+# SolidWorks Visualize project files (source, not for web)
+*.svpj

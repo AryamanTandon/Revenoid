@@ -230,6 +230,10 @@
           assembly with mates and standard hardware. Spin it below: drag to rotate,
           scroll to zoom (tap &amp; drag on mobile).
         </p>
+        <figure class="inspo reveal" data-reveal="left">
+          <img class="inspo__img zoomable" src="assets/projects/racecar-inspiration.png" alt="Vintage red toy pedal car used as the design reference" loading="lazy" />
+          <figcaption>Reference — the vintage toy pedal car I modeled from</figcaption>
+        </figure>
       </div>
 
       <div class="viewer__frame reveal" data-reveal="scale">
@@ -299,6 +303,13 @@
           </div>
         </div>
       </div>
+
+      <div class="container">
+        <figure class="exploded reveal" data-reveal="scale">
+          <img class="exploded__img zoomable" src="assets/projects/racecar-exploded.png" alt="Exploded assembly drawing of the racecar with bill of materials" loading="lazy" />
+          <figcaption>Exploded view &amp; bill of materials — click to enlarge</figcaption>
+        </figure>
+      </div>
     </section>
 
     <!-- ===== Skills ===== -->
@@ -350,6 +361,12 @@
       <p>© <span id="year"></span> Aryaman Tandon · University of Washington · Built from scratch.</p>
     </div>
   </footer>
+
+  <!-- Lightbox (click-to-enlarge images) -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Close">&times;</button>
+    <img id="lightboxImg" src="" alt="" />
+  </div>
 
   <script type="module" src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
   <script src="js/main.js"></script>
