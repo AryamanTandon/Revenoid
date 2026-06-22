@@ -21,6 +21,8 @@
   var countersStarted = [];
   var workPanels = [];
   var workImgs = [];
+  var modelViewer = null;
+  var modelTriggered = false;
 
   function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
 
@@ -143,6 +145,14 @@
       for (var wj = 0; wj < workPanels.length; wj++) workPanels[wj].classList.toggle("is-active", wj === activeW);
       for (var wk = 0; wk < workImgs.length; wk++) workImgs[wk].classList.toggle("is-active", wk === activeW);
     }
+
+    // Lazy-load the 3D model when it nears the viewport. model-viewer's own
+    // IntersectionObserver can be throttled in embedded contexts, so we drive
+    // the trigger from this reliable scroll path instead.
+    if (modelViewer && !modelTriggered && modelViewer.getBoundingClientRect().top < vh * 1.5) {
+      modelTriggered = true;
+      modelViewer.setAttribute("loading", "eager");
+    }
   }
 
   // Run update() directly on scroll. update() is cheap (a short loop over a
@@ -176,6 +186,7 @@
     sections = Array.prototype.slice.call(document.querySelectorAll("main section[id]"));
     workPanels = Array.prototype.slice.call(document.querySelectorAll(".work__panel"));
     workImgs = Array.prototype.slice.call(document.querySelectorAll(".work__frame .work__img"));
+    modelViewer = document.querySelector("#model model-viewer");
 
     if (prefersReduced) {
       revealEls.forEach(function (el) { el.classList.add("is-visible"); });

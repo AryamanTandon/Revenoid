@@ -348,6 +348,31 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================================
+   Interactive 3D model viewer
+   ============================================================ */
+.viewer__frame { max-width: 940px; margin: 36px auto 0; }
+.viewer__frame model-viewer {
+  width: 100%;
+  height: min(68vh, 600px);
+  min-height: 380px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(60% 60% at 50% 32%, rgba(157,123,214,.20), transparent 70%),
+    var(--surface);
+  --poster-color: transparent;
+  --progress-bar-color: var(--accent);
+  --progress-mask: transparent;
+}
+.viewer__hint {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: .9rem;
+  letter-spacing: .03em;
+  margin-top: 16px;
+}
+
+/* ============================================================
    Skills
    ============================================================ */
 .skills__groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }

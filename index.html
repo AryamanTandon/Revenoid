@@ -218,6 +218,36 @@
       </div>
     </section>
 
+    <!-- ===== Interactive 3D model ===== -->
+    <section class="section viewer" id="model" aria-label="Interactive 3D model">
+      <div class="container">
+        <h2 class="section__title reveal">Explore in 3D</h2>
+        <p class="section__lead reveal">
+          A CAD assembly you can spin up close — drag to rotate, scroll to zoom
+          (tap &amp; drag on mobile).
+        </p>
+        <div class="viewer__frame reveal" data-reveal="scale">
+          <model-viewer
+            src="assets/projects/vintage-racecar.glb"
+            alt="Vintage racecar CAD assembly modeled in SolidWorks"
+            camera-controls
+            touch-action="pan-y"
+            auto-rotate
+            auto-rotate-delay="600"
+            rotation-per-second="20deg"
+            interaction-prompt="auto"
+            shadow-intensity="1"
+            exposure="1.05"
+            environment-image="neutral"
+            loading="lazy"
+            ar
+            ar-modes="webxr scene-viewer quick-look">
+          </model-viewer>
+          <p class="viewer__hint">Vintage Racecar Assembly — modeled in SolidWorks</p>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== Skills ===== -->
     <section class="section section--alt" id="skills">
       <div class="container">
@@ -268,6 +298,7 @@
     </div>
   </footer>
 
+  <script type="module" src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
