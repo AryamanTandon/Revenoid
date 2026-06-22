@@ -218,32 +218,77 @@
       </div>
     </section>
 
-    <!-- ===== Interactive 3D model ===== -->
-    <section class="section viewer" id="model" aria-label="Interactive 3D model">
+    <!-- ===== Interactive 3D model / CAD project ===== -->
+    <section class="section viewer" id="model" aria-label="Vintage Racecar CAD assembly">
       <div class="container">
-        <h2 class="section__title reveal">Explore in 3D</h2>
+        <p class="viewer__eyebrow reveal">CAD Project · SolidWorks · Explore in 3D</p>
+        <h2 class="section__title reveal">Vintage Racecar — Full CAD Assembly</h2>
         <p class="section__lead reveal">
-          A CAD assembly you can spin up close — drag to rotate, scroll to zoom
-          (tap &amp; drag on mobile).
+          A vintage open-wheel racecar modeled from the ground up in SolidWorks —
+          thirteen unique parts designed individually, then brought together into a
+          30-component assembly with mates and standard hardware. Spin it below:
+          drag to rotate, scroll to zoom (tap &amp; drag on mobile).
         </p>
-        <div class="viewer__frame reveal" data-reveal="scale">
-          <model-viewer
-            src="assets/projects/vintage-racecar.glb"
-            alt="Vintage racecar CAD assembly modeled in SolidWorks"
-            camera-controls
-            touch-action="pan-y"
-            auto-rotate
-            auto-rotate-delay="600"
-            rotation-per-second="20deg"
-            interaction-prompt="auto"
-            shadow-intensity="1"
-            exposure="1.05"
-            environment-image="neutral"
-            loading="lazy"
-            ar
-            ar-modes="webxr scene-viewer quick-look">
-          </model-viewer>
-          <p class="viewer__hint">Vintage Racecar Assembly — modeled in SolidWorks</p>
+      </div>
+
+      <div class="viewer__frame reveal" data-reveal="scale">
+        <model-viewer
+          src="assets/projects/vintage-racecar.glb"
+          alt="Vintage racecar CAD assembly modeled in SolidWorks"
+          camera-controls
+          touch-action="pan-y"
+          auto-rotate
+          auto-rotate-delay="600"
+          rotation-per-second="20deg"
+          interaction-prompt="auto"
+          shadow-intensity="1"
+          exposure="1.05"
+          environment-image="neutral"
+          loading="lazy"
+          ar
+          ar-modes="webxr scene-viewer quick-look">
+        </model-viewer>
+        <p class="viewer__hint">Drag to rotate · scroll to zoom</p>
+      </div>
+
+      <div class="container">
+        <div class="viewer__details">
+          <div class="viewer__detail reveal" data-reveal="left">
+            <h3>Parts modeled</h3>
+            <ul class="viewer__parts">
+              <li>Main Body</li>
+              <li>Chassis</li>
+              <li>Engine Cover</li>
+              <li>Front Bumper</li>
+              <li>Roll Bar &amp; Pins</li>
+              <li>Steering Column</li>
+              <li>Steering Wheel</li>
+              <li>Seat</li>
+              <li>Wheels &amp; Tires (×4)</li>
+              <li>Wheel Axles</li>
+              <li>Headlights</li>
+              <li>Flat-head hardware</li>
+            </ul>
+          </div>
+
+          <div class="viewer__detail reveal" data-reveal="right">
+            <h3>Skills &amp; tools</h3>
+            <ul class="tags">
+              <li>SolidWorks</li>
+              <li>Part Modeling</li>
+              <li>Assembly Mates</li>
+              <li>Toolbox Hardware</li>
+              <li>Appearances &amp; Materials</li>
+              <li>Rendering</li>
+              <li>glTF Export</li>
+            </ul>
+            <p class="viewer__meta">
+              Each part was sculpted individually, then assembled with mates and
+              standard fasteners and finished with realistic appearances — brushed
+              aluminum, polished silver, clear glass, ceramic, and automotive paint.
+            </p>
+            <p class="viewer__stats">13 unique parts · 30 components · 13 applied appearances</p>
+          </div>
         </div>
       </div>
     </section>
