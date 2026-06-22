@@ -4,25 +4,20 @@ A static portfolio website (HTML + CSS + JS, no build step).
 
 ## Structure
 ```
-index.html        Page structure (nav, hero, about, projects, skills, contact)
-css/styles.css    All styling + scroll-reveal + responsive rules
-js/projects.js    ← EDIT THIS to add/change projects (data only)
-js/main.js        Rendering + interactions (nav, mobile menu, scroll reveal)
-assets/projects/  Put project images here
+index.html        All page content: nav, hero, about, BatNAV showcase,
+                  Selected Work showcase, skills, contact
+css/styles.css    All styling + animations + responsive rules
+js/main.js        Interactions (nav, mobile menu, scroll animations)
+assets/projects/  Project images
 ```
 
-## Add a project
-Open `js/projects.js` and add an entry to the `PROJECTS` array:
-```js
-{
-  title: "My Cool Robot Arm",
-  tag: "Robotics",
-  desc: "A 5-DOF arm I designed and built. Cut cycle time by 40%.",
-  image: "assets/projects/robot-arm.jpg",   // or "" for a placeholder
-  tags: ["SolidWorks", "FEA", "Arduino"],
-  links: [{ label: "Case Study", url: "https://..." }]
-}
-```
+## Projects
+Projects live directly in `index.html` as two showcase sections:
+- **`#showcase`** — the featured BatNAV scroll-scrubbed section.
+- **`#work`** ("Selected Work") — a sticky image + scrolling story for the
+  other projects. To add one, copy a `.work__panel` (in the story column)
+  and a matching `.work__img` (in `.work__frame`), keeping their
+  `data-work` indices in sync.
 
 ## Preview locally
 ```
@@ -30,9 +25,9 @@ python3 -m http.server 8000
 ```
 Then open http://localhost:8000
 
-## Publish (free options)
-- **GitHub Pages:** push to a repo → Settings → Pages → deploy from `main`.
-- **Netlify / Vercel:** drag the folder onto their dashboard.
+## Hosting
+Deployed on **Vercel**, connected to GitHub (`AryamanTandon/Revenoid`).
+Push to `main` → Vercel auto-deploys in ~1 min.
 
 ## Animations (in `js/main.js` + `css/styles.css`)
 - Scroll progress bar (top of page)
@@ -43,6 +38,5 @@ Then open http://localhost:8000
 - All animations respect `prefers-reduced-motion`
 
 ## Next steps
-- Add a high-res image for the Autev internship card (currently placeholder).
 - Embed the BatNAV demo video (upload to YouTube, then drop the link in).
-- Optional: a "pinned/scrubbed" showcase section for the featured project.
+- Make project content SEO-visible (it currently lives in static HTML — done).

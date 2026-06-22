@@ -24,42 +24,6 @@
 
   function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
 
-  /* ---------- Render project cards (with stagger) ---------- */
-  function renderProjects() {
-    var grid = document.getElementById("projectsGrid");
-    if (!grid || typeof PROJECTS === "undefined") return;
-
-    grid.innerHTML = PROJECTS.map(function (p, i) {
-      var media = p.image
-        ? '<img src="' + p.image + '" alt="' + escapeHtml(p.title) + '" loading="lazy" />'
-        : "<span>Image coming soon</span>";
-      var tags = (p.tags || []).map(function (t) { return "<span>" + escapeHtml(t) + "</span>"; }).join("");
-      var links = (p.links || []).map(function (l) {
-        return '<a href="' + l.url + '" target="_blank" rel="noopener">' + escapeHtml(l.label) + " &rarr;</a>";
-      }).join("");
-      var delay = (i % 3) * 0.09;
-
-      return (
-        '<article class="project-card reveal" data-reveal="scale" style="--reveal-delay:' + delay + 's">' +
-          '<div class="project-card__media">' + media + "</div>" +
-          '<div class="project-card__body">' +
-            '<span class="project-card__tag">' + escapeHtml(p.tag || "") + "</span>" +
-            '<h3 class="project-card__title">' + escapeHtml(p.title) + "</h3>" +
-            '<p class="project-card__desc">' + escapeHtml(p.desc || "") + "</p>" +
-            '<div class="project-card__tags">' + tags + "</div>" +
-            '<div class="project-card__links">' + links + "</div>" +
-          "</div>" +
-        "</article>"
-      );
-    }).join("");
-  }
-
-  function escapeHtml(str) {
-    return String(str).replace(/[&<>"']/g, function (c) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
-    });
-  }
-
   /* ---------- Mobile menu ---------- */
   function initMobileMenu() {
     var toggle = document.getElementById("navToggle");
@@ -201,8 +165,6 @@
   function init() {
     // Always start at the top so reveals play as the user scrolls
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-
-    renderProjects();
 
     bar = document.getElementById("scrollProgress");
     hero = document.getElementById("hero");
