@@ -1,0 +1,3 @@
+*{box-sizing:border-box;}
+body{margin:0;background:#08090b;}
+@keyframes bnpulse{0%,100%{opacity:.55;}50%{opacity:1;}}

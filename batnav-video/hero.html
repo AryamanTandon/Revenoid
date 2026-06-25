@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BatNAV — 3D hero</title>
+<style>
+  :root{
+    --green:#36E0A0; --amber:#F5A623; --red:#E5484D;
+    --muted:rgba(255,255,255,.55);
+  }
+  *{margin:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:#000;color:#fff;overflow:hidden;
+    font-family:Inter,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  #stage{position:relative;width:100vw;height:100vh}
+  canvas{display:block}
+
+  .overlay{position:absolute;inset:0;pointer-events:none}
+  .top{position:absolute;top:9%;left:0;right:0;text-align:center}
+  .eyebrow{font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--green);text-shadow:0 0 14px rgba(54,224,160,.6)}
+  .title{margin-top:14px;font-size:84px;font-weight:800;letter-spacing:-.02em;line-height:1;
+    text-shadow:0 0 40px rgba(255,255,255,.12)}
+  .sub{margin-top:16px;font-size:19px;color:var(--muted);font-weight:400}
+
+  .pill{position:absolute;display:flex;align-items:center;gap:8px;
+    padding:7px 13px;border-radius:999px;
+    background:rgba(20,22,26,.72);border:1px solid rgba(255,255,255,.10);
+    font-size:13px;font-weight:500;color:#eef2f4;backdrop-filter:blur(6px);
+    box-shadow:0 0 18px rgba(0,0,0,.5)}
+  .pill .dot{width:7px;height:7px;border-radius:50%}
+  .pill.g .dot{background:var(--green);box-shadow:0 0 10px var(--green)}
+  .pill.a .dot{background:var(--amber);box-shadow:0 0 10px var(--amber)}
+  .pill.r .dot{background:var(--red);box-shadow:0 0 10px var(--red)}
+  .p1{top:40%;left:7%}
+  .p2{top:54%;right:7%}
+  .p3{top:67%;left:12%}
+</style>
+</head>
+<body>
+  <div id="stage">
+    <div class="overlay">
+      <div class="top">
+        <div class="eyebrow">Wearable navigation device</div>
+        <div class="title">BatNAV</div>
+        <div class="sub">The cane, reimagined for your shoe.</div>
+      </div>
+      <div class="pill g p1"><span class="dot"></span>HC-SR04 · ultrasonic</div>
+      <div class="pill a p2"><span class="dot"></span>MPU6050 · gyroscope</div>
+      <div class="pill r p3"><span class="dot"></span>KG-160 · vibration motors</div>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {"imports":{
+    "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }}
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+    import { Reflector } from 'three/addons/objects/Reflector.js';
+
+    const stage = document.getElementById('stage');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000000);
+
+    const camera = new THREE.PerspectiveCamera(38, innerWidth/innerHeight, 0.1, 100);
+    camera.position.set(0, 0.4, 6);
+
+    const renderer = new THREE.WebGLRenderer({antialias:true});
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+    renderer.setSize(innerWidth, innerHeight);
+    stage.appendChild(renderer.domElement);
+
+    // lighting
+    scene.add(new THREE.AmbientLight(0x20242a, 1.0));
+    const key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(3,4,5); scene.add(key);
+    const mint = new THREE.PointLight(0x36E0A0, 8, 22); mint.position.set(-4,1,3); scene.add(mint);
+    const amber = new THREE.PointLight(0xF5A623, 5, 22); amber.position.set(3,-3,-2); scene.add(amber);
+    const back = new THREE.DirectionalLight(0x88aaff, 0.6); back.position.set(-2,2,-4); scene.add(back);
+
+    // post-processing: subtle bloom so mint edges + cone glow
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight), 0.75, 0.6, 0.55);
+    composer.addPass(bloom);
+    composer.addPass(new OutputPass());
+
+    const group = new THREE.Group(); scene.add(group);
+    const rings = [];                 // ultrasonic pulse rings
+    let floor = null;
+
+    new GLTFLoader().load('public/batnav-housing.glb', (gltf)=>{
+      const model = gltf.scene;
+      const mat = new THREE.MeshStandardMaterial({color:0x6b7480, metalness:0.55, roughness:0.5, side:THREE.DoubleSide});
+      model.traverse(o=>{ if(o.isMesh){
+        o.material = mat; o.geometry.computeVertexNormals();
+        const edges = new THREE.LineSegments(
+          new THREE.EdgesGeometry(o.geometry, 25),
+          new THREE.LineBasicMaterial({color:0x9fffe0, transparent:true, opacity:0.35}));
+        o.add(edges);
+      }});
+
+      const box = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      const sphere = box.getBoundingSphere(new THREE.Sphere());
+      const size = box.getSize(new THREE.Vector3());
+      model.position.sub(center);
+      model.rotation.x = -0.32;
+      group.add(model);
+
+      // ---- ultrasonic emitter on the +Z (sensor) face ----
+      const emitter = new THREE.Object3D();
+      emitter.position.set(0, 0, size.z*0.5 + 0.02);
+      model.add(emitter);
+      // glowing sensor eye
+      const eye = new THREE.Mesh(
+        new THREE.SphereGeometry(0.06, 16, 16),
+        new THREE.MeshBasicMaterial({color:0x9fffe0}));
+      emitter.add(eye);
+      // expanding sonar rings
+      for(let i=0;i<4;i++){
+        const r = new THREE.Mesh(
+          new THREE.RingGeometry(0.42, 0.5, 48),
+          new THREE.MeshBasicMaterial({color:0x36E0A0, transparent:true, opacity:0,
+            side:THREE.DoubleSide, blending:THREE.AdditiveBlending, depthWrite:false}));
+        r.userData.phase = i/4;
+        emitter.add(r); rings.push(r);
+      }
+
+      // ---- floor reflection ----
+      floor = new Reflector(new THREE.PlaneGeometry(24,24), {
+        textureWidth: 1024, textureHeight: 1024, color: 0x0b0d10 });
+      floor.rotation.x = -Math.PI/2;
+      floor.position.y = -size.y*0.55;
+      scene.add(floor);
+
+      const r0 = sphere.radius;
+      const dist = r0 / Math.sin((camera.fov*Math.PI/180)/2) * 2.1;
+      camera.position.set(0, r0*0.15, dist);
+      camera.lookAt(0,0,0);
+
+      window.__diag = {size:size.toArray().map(n=>+n.toFixed(2)), radius:+r0.toFixed(2), dist:+dist.toFixed(2)};
+      window.__ready = true;
+    }, undefined, (e)=>{ console.error('GLB load error', e); });
+
+    addEventListener('resize', ()=>{
+      camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+      composer.setSize(innerWidth, innerHeight);
+    });
+
+    let t=0.6;
+    (function loop(){
+      requestAnimationFrame(loop);
+      t+=0.006;
+      group.rotation.y = t;
+      // animate sonar rings: expand outward + fade, staggered
+      for(const r of rings){
+        let p = (t*0.6 + r.userData.phase) % 1;
+        const s = 0.3 + p*2.2;
+        r.scale.set(s,s,s);
+        r.material.opacity = Math.max(0, (1-p)) * 0.7;
+      }
+      composer.render();
+    })();
+  </script>
+</body>
+</html>

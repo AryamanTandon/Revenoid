@@ -11,6 +11,11 @@ js/main.js        Interactions (nav, mobile menu, scroll animations)
 assets/projects/  Project images
 ```
 
+> The **BatNAV teaser video** is a separate project and lives entirely in
+> `batnav-video/` (Remotion render + the rendered `batnav-teaser.mp4`, the
+> standalone `hero.html` 3D experiment, and `reference/` keyframes). It is
+> not part of this website's deploy.
+
 ## Projects
 Projects live directly in `index.html` as two showcase sections:
 - **`#showcase`** — the featured BatNAV scroll-scrubbed section.
